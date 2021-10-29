@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+    {% if meta.description %}
+        <meta name="description" content="{{ meta.description|striptags }}" />
+    {% endif %}
+    {% if meta.robots %}
+        <meta name="robots" content="{{ meta.robots }}" />
+    {% endif %}
+
+    {% if current_page %}
+        <link rel="canonical" href="{{ current_page.url }}" />
+    {% endif %}
+
+    <link rel="stylesheet" id="stylesheet">
+    <style>
+      aside:first-child {
+        position: fixed;
+        right: 0;
+        background: #eee;
+        padding: 1em;
+        color: #1f1f1f;
+        max-width: 300px;
+      }
+    </style>
+</head>
+<body>
+
+    <aside>
+      <div>
+        <label for="select-css">Select CSS</label>
+        <select name="select-css" id="select-css">
+          <option value="">No CSS (browser defaults)</option>
+          <optgroup label="Classless" id="select-css-resets">
+          </optgroup>
+          <optgroup label="Others" id="select-css-frameworks">
+          </optgroup>
+        </select>
+      </div>
+    </aside>
+
+    <header>
+            <nav role="navigation" tabindex="-1">
+                <ul>
+                    {% for page in pages(depthOffset=-1) if page.title and not page.hidden %}
+                        <li{% if page.id == current_page.id %} class="active"{% endif %}>
+                            <a href="{{ page.url }}">{{ page.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+    </header>
+
+    <main>
+            {{ content }}
+    </main>
+
+    <footer>
+        <p>C'est le pied de page</p>
+    </footer>
+
+    <script src="{{ theme_url }}/js/element-tester.js" type="text/javascript"></script>
+
+</body>
+</html>
