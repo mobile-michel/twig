@@ -1,6 +1,6 @@
 {# to return a list of all child pages of the current page, use pages(current_page.id) #}
 
-<section class="articles">
+<section>
     {% for page in pages(current_page.id) if not page.hidden %}
         <article>
             <h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
