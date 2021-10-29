@@ -1,0 +1,18 @@
+        <section class="container">
+            {{ "sub/page"|link }}<br>
+            {{ meta.image|url }}<br>
+            {{ "sub/page"|content }}
+            {{ meta.description|markdown }}
+            {{ "This really is a *single* line"|markdown(singleLine=true) }}
+            {{ pages|map("title") }}
+            {% for page in pages(current_page.id) if not page.hidden %}
+                <article>
+                    <h2>{{ page.title }}</h2>
+                    <p>{{ page.description }}</p>
+                    <p>{{ page.id|content }}</p>
+                </article>
+            {% endfor %}
+            {% for page in pages|sort_by([ 'meta', 'nav' ]) %}
+            <h2>{{ page.title }}</h2>
+            {% endfor %}
+        </section>
